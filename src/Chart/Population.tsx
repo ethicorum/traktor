@@ -27,7 +27,6 @@ class Population extends Component<{
         var duration = 500;
 
         // domains
-        const xDomain = (d) => d.key;
         // const yDomain = (d) => d.population;
 
         return (
@@ -39,25 +38,13 @@ class Population extends Component<{
                     height={height}
                     margins={margins}
                 >
-                    {/* <Bars
-                        data={data}
-                        width={width}
-                        height={height}
-                        margins={margins}
-                        duration={duration}
-                        xDomain={xDomain}
-                        yDomain={yDomain}
-                        xKey="key"
-                        yKey="population"
-                        onClick={(d) => this.onClickBar(d)}
-                    /> */}
                     <XAxis
                         data={data}
                         width={width}
                         height={height}
                         margins={margins}
                         duration={duration}
-                        xDomain={xDomain}
+                        xDomain={(d) => d.key}
                     />
                 </Chart>
                 <div>qwer2</div>
@@ -65,18 +52,5 @@ class Population extends Component<{
         );
     }
 }
-
-// const mapDispatchToProps = (dispatch) => ({
-//     selectCountry: (payload) => dispatch(selectCountry(payload)),
-//     backCountry: () => dispatch(backCountry())
-// });
-
-// const mapStateToProps = (state) => {
-//     return {
-//         data: state.population.data,
-//         mode: state.population.mode,
-//         country: state.population.country
-//     };
-// };
 
 export default withFauxDOM(Population);

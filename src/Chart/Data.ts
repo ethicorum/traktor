@@ -2,8 +2,8 @@ export const SELECT_COUNTRY = "SELECT_COUNTRY";
 export const BACK_COUNTRY = "BACK_COUNTRY";
 
 export interface IRawData {
-    city: string;
-    country: string;
+    city?: string;
+    country?: string;
     population: number;
     key?: string;
 }
@@ -66,35 +66,7 @@ export const rawData: IRawData[] = [
     }
 ];
 
-// export default (state = initialState, action) => {
-//     switch (action.type) {
-//         case SELECT_COUNTRY:
-//             var countryData = convertToConfig(
-//                 rawData.filter(
-//                     (v) => v.country === (action.payload || v.country)
-//                 ),
-//                 ["city"]
-//             );
-//             return {
-//                 ...state,
-//                 data: countryData,
-//                 mode: "city",
-//                 country: action.payload
-//             };
-//         case BACK_COUNTRY:
-//             var allData = convertToConfig(rawData, ["country"]);
-//             return {
-//                 ...state,
-//                 data: allData,
-//                 mode: "country",
-//                 country: null
-//             };
-//         default:
-//             return state;
-//     }
-// };
-
-export const selectCountry = (payload) => {
+export const selectCountry = (payload: unknown) => {
     return {
         type: SELECT_COUNTRY,
         payload
@@ -113,11 +85,11 @@ export const backCountry = () => {
  * @returns {ChartConfigItem[]}
  */
 function convertToConfig(cities: IRawData[], group_keys: string[]): IRawData[] {
-    const config = cities.reduce((prev, city) => {
+    const config = cities.reduce((prev, city: IRawData) => {
         const key = group_keys.reduce((prev, k, i, a) => {
             if (prev === "N/A") {
                 return prev;
-            } else if (city.hasOwnProperty(k)) {
+            } else if (k in city) {
                 return prev + city[k];
             } else {
                 return "N/A";

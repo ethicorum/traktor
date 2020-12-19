@@ -15,12 +15,11 @@ interface IXAxis extends ReactFauxDomProps {
         right: number;
     };
     duration: number;
-    xDomain: (k: number) => number;
+    xDomain: (k: IRawData) => string;
 }
 
 class XAxis extends Component<IXAxis> {
     static defaultProps = {
-        xDomain: (d) => d,
         ...CommonProps
     };
 
@@ -28,20 +27,24 @@ class XAxis extends Component<IXAxis> {
         this.renderD3();
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps: Readonly<IXAxis>, prevState: Readonly<{}>) {
         // do not compare props.chart as it gets updated in updateD3()
         if (this.props.data !== prevProps.data) {
             this.updateD3();
         }
     }
 
-    getXScale(width, domain, data) {
+    getXScale(
+        width: number,
+        domain: (d: IRawData) => string,
+        data: IRawData[]
+    ) {
         let xScale = d3.scaleBand().rangeRound([0, width]).padding(0.3);
         xScale.domain(data.map(domain));
         return xScale;
     }
 
-    getXAxis(xScale) {
+    getXAxis(xScale: d3.ScaleBand<string>): d3.Axis<string> {
         return d3.axisBottom(xScale);
     }
 

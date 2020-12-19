@@ -26,7 +26,7 @@ export interface IChart {
         left: number;
         right: number;
     };
-    id?: string;
+    id?: string | null;
     svgClassName?: string;
     data: IRawData[];
 }
@@ -57,7 +57,7 @@ class Chart extends Component<IChart> {
                 height={height + margins.top + margins.bottom}
                 width={width + margins.left + margins.right}
                 className={svgClassName}
-                id={id}
+                id={id ?? undefined}
                 ref="svgContainer"
             >
                 <g transform={t}>{children}</g>
