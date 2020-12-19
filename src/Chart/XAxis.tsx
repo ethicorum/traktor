@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, ReactNode } from "react";
 import * as d3 from "d3";
 import { ReactFauxDomProps, withFauxDOM } from "react-faux-dom";
 import { IRawData } from "./Data";
@@ -16,6 +16,7 @@ interface IXAxis extends ReactFauxDomProps {
     };
     duration: number;
     xDomain: (k: IRawData) => string;
+    chart: ReactNode;
 }
 
 class XAxis extends Component<IXAxis> {

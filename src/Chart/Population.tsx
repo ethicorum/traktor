@@ -3,6 +3,7 @@ import { withFauxDOM } from "react-faux-dom";
 import Chart from "./Chart";
 import { IRawData } from "./Data";
 import XAxis from "./XAxis";
+import Tree from "./Tree";
 // import XAxis from "./Xaxis";
 
 class Population extends Component<{
@@ -32,6 +33,7 @@ class Population extends Component<{
         return (
             <div>
                 <div>qwer</div>
+                <Tree chart="loading" />
                 <Chart
                     data={data}
                     width={width}
